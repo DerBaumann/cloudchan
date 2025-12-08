@@ -1,6 +1,6 @@
 import { db } from "$lib/server/db/index.js";
 import { postTable } from "$lib/server/db/schema.js";
-import { fail } from "@sveltejs/kit";
+import { fail, redirect } from "@sveltejs/kit";
 
 export const actions = {
   async create({ request }) {
@@ -17,5 +17,7 @@ export const actions = {
     }
 
     await db.insert(postTable).values({ author, content });
+
+    redirect(303, "/");
   },
 };

@@ -1,6 +1,16 @@
+<script>
+  import { enhance } from "$app/forms";
+
+  let { form } = $props();
+
+</script>
 <h1>Neuer Post</h1>
 
-<form method="POST" action="?/create" class="max-w-fit">
+{#if form?.error}
+  <p>Error: {form.error}</p>
+{/if}
+
+<form method="POST" action="?/create" use:enhance class="max-w-fit">
   <fieldset class="fieldset">
     <legend class="fieldset-legend">Author</legend>
     <input type="text" name="author" required class="input" />
