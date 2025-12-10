@@ -1,6 +1,6 @@
 import { db } from "$lib/server/db";
 import { postTable } from "$lib/server/db/schema";
-import { fail, redirect } from "@sveltejs/kit";
+import { fail } from "@sveltejs/kit";
 
 export async function load() {
   const posts = await db.select().from(postTable);
@@ -23,7 +23,5 @@ export const actions = {
     }
 
     await db.insert(postTable).values({ author, content });
-
-    redirect(303, "/");
   },
 };
