@@ -7,6 +7,7 @@
 
 <svelte:head>
   <link rel="icon" href={favicon} />
+  <title>CloudChan</title>
 </svelte:head>
 
 <main class="py-16 px-8">

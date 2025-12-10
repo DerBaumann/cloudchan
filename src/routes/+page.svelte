@@ -5,11 +5,13 @@
   let { data, form } = $props();
 </script>
 
+<h1 class="text-4xl font-bold mb-16">CloudChan</h1>
+
 {#if form?.error}
   <p>Error: {form.error}</p>
 {/if}
 
-<form method="POST" action="?/create" use:enhance class="max-w-fit mb-16">
+<form method="POST" use:enhance class="max-w-fit mb-16">
   <fieldset class="fieldset">
     <legend class="fieldset-legend">Author</legend>
     <input type="text" name="author" required class="input" />
@@ -39,6 +41,9 @@
       <div class="card-body">
         <h2 class="card-title">{post.author}</h2>
         <p>{post.content}</p>
+        <p class="text-sm text-base-content/40">
+          {post.createdAt.toLocaleDateString("de-CH")} - {post.createdAt.getHours()}:{post.createdAt.getMinutes()}
+        </p>
       </div>
     </div>
   {:else}

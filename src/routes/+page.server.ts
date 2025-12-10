@@ -13,7 +13,7 @@ export async function load() {
 }
 
 export const actions = {
-  async create({ request }) {
+  async default({ request }) {
     const data = await request.formData();
 
     const author = data.get("author")?.toString();
