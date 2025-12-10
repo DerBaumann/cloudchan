@@ -1,5 +1,6 @@
 <script lang="ts">
   import { enhance } from "$app/forms";
+  import { fly } from "svelte/transition";
 
   let { data, form } = $props();
 </script>
@@ -31,7 +32,10 @@
 
 <section class="flex gap-16 flex-col">
   {#each data.posts as post (post.id)}
-    <div class="card bg-base-200 w-96 shadow-sm">
+    <div
+      transition:fly={{ x: -200, duration: 500 }}
+      class="card bg-base-200 w-96 shadow-sm"
+    >
       <div class="card-body">
         <h2 class="card-title">{post.author}</h2>
         <p>{post.content}</p>

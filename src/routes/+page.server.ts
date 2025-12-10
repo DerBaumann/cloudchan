@@ -1,9 +1,13 @@
 import { db } from "$lib/server/db";
 import { postTable } from "$lib/server/db/schema";
 import { fail } from "@sveltejs/kit";
+import { desc } from "drizzle-orm";
 
 export async function load() {
-  const posts = await db.select().from(postTable);
+  const posts = await db
+    .select()
+    .from(postTable)
+    .orderBy(desc(postTable.createdAt));
 
   return { posts };
 }
