@@ -1,14 +1,33 @@
 <script lang="ts">
-  import type { PostSelectModel } from "$lib/types/post";
+  import { enhance } from "$app/forms";
 
-  interface PageProps {
-    data: {
-      posts: PostSelectModel[];
-    };
-  }
-
-  let { data }: PageProps = $props();
+  let { data, form } = $props();
 </script>
+
+{#if form?.error}
+  <p>Error: {form.error}</p>
+{/if}
+
+<form method="POST" action="?/create" use:enhance class="max-w-fit mb-16">
+  <fieldset class="fieldset">
+    <legend class="fieldset-legend">Author</legend>
+    <input type="text" name="author" required class="input" />
+  </fieldset>
+
+  <fieldset class="fieldset">
+    <textarea
+      class="textarea h-24"
+      name="content"
+      required
+      placeholder="Lorem Ipsum..."
+    ></textarea>
+  </fieldset>
+
+  <div class="flex justify-between">
+    <button type="submit" class="btn btn-primary">Post</button>
+    <a href="/" class="btn btn-outline btn-secondary">Zurück</a>
+  </div>
+</form>
 
 <section class="flex gap-16 flex-col">
   {#each data.posts as post (post.id)}
