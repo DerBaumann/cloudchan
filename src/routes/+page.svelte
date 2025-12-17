@@ -11,7 +11,7 @@
   <p>Error: {form.error}</p>
 {/if}
 
-<form method="POST" use:enhance class="max-w-fit mb-16">
+<form method="POST" action="?/create" use:enhance class="max-w-fit mb-16">
   <fieldset class="fieldset">
     <legend class="fieldset-legend">Author</legend>
     <input type="text" name="author" required class="input" />
@@ -44,9 +44,12 @@
         <p class="text-sm text-base-content/40">
           {post.createdAt.toLocaleDateString("de-CH")} - {post.createdAt.getHours()}:{post.createdAt.getMinutes()}
         </p>
+        <form method="POST" action="?/delete">
+          <input type="hidden" name="postId" value={post.id} />
+          <button type="submit" class="btn btn-error bg-red-700 border-red-700 btn-sm btn-">delete</button>
+        </form>
       </div>
     </div>
-  {:else}
     <p>Keine Posts vorhanden!</p>
   {/each}
 </section>

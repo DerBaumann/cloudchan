@@ -2,6 +2,7 @@ import { db } from "$lib/server/db";
 import { postTable } from "$lib/server/db/schema";
 import { fail } from "@sveltejs/kit";
 import { desc } from "drizzle-orm";
+import { eq } from "drizzle-orm";
 
 export async function load() {
   const posts = await db
@@ -13,7 +14,7 @@ export async function load() {
 }
 
 export const actions = {
-  async default({ request }) {
+  async create({ request }) {
     const data = await request.formData();
 
     const author = data.get("author")?.toString();
@@ -28,4 +29,18 @@ export const actions = {
 
     await db.insert(postTable).values({ author, content });
   },
+
+  async delete({ request }) {
+    const data = await request.formData();
+    const postId = data.get("postId")?.toString();
+    console.log("DELETE postId:", postId, typeof postId);
+
+    if (!postId) {
+      return fail(400, { error: "Post ID fehlt" });
+    }
+
+    await db
+      .delete(postTable)
+      .where(eq(postTable.id, postId));
+  }
 };
