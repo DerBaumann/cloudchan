@@ -8,8 +8,10 @@ if [[ $EUID -ne 0 ]]; then
   exit 1
 fi
 
-# Dependencies
-dnf install nodejs
+# Install Node & NPM
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+source ~/.bashrc
+nvm install --lts
 
 # Setup
 npm ci
