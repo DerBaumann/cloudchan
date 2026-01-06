@@ -46,10 +46,16 @@
         </p>
         <form method="POST" action="?/delete">
           <input type="hidden" name="postId" value={post.id} />
-          <button type="submit" class="btn btn-error bg-red-700 border-red-700 btn-sm btn-">delete</button>
+          <button
+            type="submit"
+            class="btn btn-error bg-red-700 border-red-700 btn-sm btn-"
+            >delete</button
+          >
         </form>
       </div>
     </div>
+  {:else}
     <p>Keine Posts vorhanden!</p>
   {/each}
 </section>
+
