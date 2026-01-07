@@ -45,5 +45,7 @@ npm ci
 npm run db:migrate
 
 # Build & Run
+public_ip=$(curl https://ipinfo.io/ip)
+
 npm run build
-node build
+ORIGIN="http://$public_ip/" node build
